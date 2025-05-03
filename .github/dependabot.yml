@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: "docker"
+    directory: "/python/uv"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "build🤖 "
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "build🤖 "
+
