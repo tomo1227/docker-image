@@ -1,4 +1,4 @@
-FROM golang:1.24.3-bookworm
+FROM golang:1.24.4-bookworm
 
 USER root
 
@@ -50,6 +50,10 @@ ENV LC_ALL=ja_JP.UTF-8
 WORKDIR /workspace
 
 USER $USERNAME
+
+RUN go install -v github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
+RUN go install -v github.com/cweill/gotests/gotests@v1.6.0
+RUN go install -v github.com/go-delve/delve/cmd/dlv@latest
 
 SHELL ["/bin/bash", "-c"]
 CMD ["/bin/bash"]
