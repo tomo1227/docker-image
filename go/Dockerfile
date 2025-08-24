@@ -1,4 +1,4 @@
-FROM golang:1.24.4-bookworm
+FROM golang:1.25.0-trixie
 
 USER root
 
@@ -16,7 +16,7 @@ ENV GOPATH=${TARGET_GOPATH}
 ENV PATH="${GOROOT}/bin:${GOPATH}/bin:${PATH}"
 
 RUN apt update \
-    && apt install -y sudo findutils binutils pkg-config bash-completion gcc tar wget make curl openssh-client locales bash git gnupg2 ca-certificates
+    && apt install -y sudo findutils binutils pkg-config bash-completion gcc tar wget make curl openssh-client locales bash git gnupg2 ca-certificates vim
 
 RUN umask 0002
 RUN if ! cat /etc/group | grep -e "^golang:" > /dev/null 2>&1; then \
@@ -52,8 +52,9 @@ WORKDIR /workspace
 USER $USERNAME
 
 RUN go install -v github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
-RUN go install -v github.com/cweill/gotests/gotests@v1.6.0
+RUN go install -v github.com/cweill/gotests/gotests@latest
 RUN go install -v github.com/go-delve/delve/cmd/dlv@latest
+RUN go install github.com/ramya-rao-a/go-outline@latest
 
 SHELL ["/bin/bash", "-c"]
 CMD ["/bin/bash"]

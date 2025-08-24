@@ -2,7 +2,7 @@
 
 ## go
 
-* [tomomon1227/go:1.1.0](https://hub.docker.com/r/tomomon1227/go)
+* [tomomon1227/go:1.2.0](https://hub.docker.com/r/tomomon1227/go)
 
 ## python
 
