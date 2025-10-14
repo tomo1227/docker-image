@@ -1,4 +1,4 @@
-FROM golang:1.25.0-trixie
+FROM golang:1.25.3-trixie
 
 USER root
 
@@ -41,10 +41,11 @@ RUN chsh --shell /bin/bash ${USERNAME}
 RUN echo 'export PS1="\[\033[0;32m\]\u\[\033[0m\] ➜ \[\033[1;34m\]\w\[\033[0m\] \$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo \"(\[\033[1;31m\]\$(git rev-parse --abbrev-ref HEAD)\[\033[0m\])\"; fi)\$ "' >> /home/$USERNAME/.bashrc
 
 RUN echo "ja_JP.UTF-8 UTF-8" > /etc/locale.gen && \
-    locale-gen ja_JP.UTF-8 && \
+    locale-gen && \
     dpkg-reconfigure locales && \
-    /usr/sbin/update-locale LANG=ja_JP.UTF-8
+    /usr/sbin/update-locale LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8
 
+ENV LANG=ja_JP.UTF-8
 ENV LC_ALL=ja_JP.UTF-8
 
 WORKDIR /workspace
